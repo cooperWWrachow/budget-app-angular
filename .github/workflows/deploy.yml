@@ -35,3 +35,5 @@ jobs:
 
       - name: Sync to S3
         run: aws s3 sync dist/budget-app/browser/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
+        working-directory: ./budget-app
+
