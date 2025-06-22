@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./budget-app
 
       - name: Build Angular App
         run: ng build budget-app --configuration production
