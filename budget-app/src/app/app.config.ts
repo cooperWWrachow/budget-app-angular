@@ -1,14 +1,20 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideAuth0 } from '@auth0/auth0-angular';
+
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch())
+    provideZonelessChangeDetection(),
+    provideRouter(routes),
+    provideAuth0({
+      domain: 'dev-7m664iv27x6sw5da.us.auth0.com',
+      clientId: 'KvUApXHzhvBBriPnP0fIBzWfZxR6SNPS',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    }),
   ]
 };
